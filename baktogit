@@ -11,7 +11,8 @@
 #
 # --                                                            ; }}}1
 
-function usage () {
+function usage ()
+{                                                               # {{{1
   cat <<-__END | sed 's!^    !!'
     export BAKTOGIT_REPO=/path/to/repo  # must be a git repo
     export BAKTOGIT_PUSH=yes            # to push as well
@@ -20,7 +21,7 @@ function usage () {
 
     # NB: you can use a .gitignore file to exclude files.
 __END
-}
+}                                                               # }}}1
 
 date="$( date +'%F %T' )"
 
@@ -34,34 +35,34 @@ if [ ! -e "$BAKTOGIT_REPO"/.git ]; then
   exit 1
 fi
 
-{
-  pushd "$BAKTOGIT_REPO" >/dev/null || exit 1
+# --
 
-  echo "==> $BAKTOGIT_REPO <=="
+pushd "$BAKTOGIT_REPO" >/dev/null || exit 1
+
+echo "==> $BAKTOGIT_REPO <=="
+echo
+
+for item in "$@"; do
+  echo "  ==> $item <=="
+  if [ -d "$item" ]; then
+    [ -e ./"$item" ] && rm -r ./"$item"
+    mkdir -p ./"$item"
+    rsync -a --delete "$item"/ ./"$item"/
+  else
+    mkdir -p ./"$( dirname "$item" )"
+    cp -aT "$item" ./"$item"
+  fi
   echo
+done
 
-  for item in "$@"; do
-    echo "  ==> $item <=="
-    if [ -d "$item" ]; then
-      [ -e ./"$item" ] && rm -r ./"$item"
-      mkdir -p ./"$item"
-      rsync -a --delete "$item"/ ./"$item"/
-    else
-      mkdir -p ./"$( dirname "$item" )"
-      cp -aT "$item" ./"$item"
-    fi
-    echo
-  done
+echo
+git add . ; git add -u ; git commit -m "baktogit @ $date"
+echo
+git status
+echo
 
-  echo
-  git add . ; git add -u ; git commit -m "baktogit @ $date"
-  echo
-  git status
-  echo
+[[ "$BAKTOGIT_PUSH" == [yY]* ]] && git push
 
-  [[ "$BAKTOGIT_PUSH" == [yY]* ]] && git push
-
-  popd >/dev/null || exit 1
-}
+popd >/dev/null || exit 1
 
 # vim: set tw=70 sw=2 sts=2 et fdm=marker :

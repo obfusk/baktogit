@@ -17,6 +17,8 @@
   baktogit incrementally backups files and directories to a git
   repository -- mostly intended for configuration files.
 
+  See baktogit.cron.sample for a cron example.
+
 []: }}}1
 
 ## Usage

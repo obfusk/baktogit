@@ -30,14 +30,16 @@ fi
   echo
 
   for item in "$@"; do
+    echo "  ==> $item <=="
     if [ -d "$item" ]; then
       [ -e ./"$item" ] && rm -r ./"$item"
       mkdir -p ./"$item"
+      rsync -a --delete "$item"/ ./"$item"/
     else
       mkdir -p ./"$( dirname "$item" )"
+      cp -aT "$item" ./"$item"
     fi
-
-    cp -vaT "$item" ./"$item"
+    echo
   done
 
   echo

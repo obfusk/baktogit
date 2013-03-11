@@ -1,0 +1,54 @@
+#!/bin/bash
+
+function usage () {
+  cat <<-__END | sed 's!^    !!'
+    export BAKTOGIT_REPO=/path/to/repo  # must be a git repo
+    export BAKTOGIT_PUSH=yes            # to push as well
+
+    baktogit <file-or-dir(s)> ...       # absolute paths!
+
+    # NB: you can use a .gitignore file to exclude files.
+__END
+}
+
+date="$( date +'%F %T' )"
+
+if [ "$#" -eq 0 -o "$1" == --help ]; then
+  usage >&2
+  exit 0
+fi
+
+if [ ! -e "$BAKTOGIT_REPO"/.git ]; then
+  echo "\`$BAKTOGIT_REPO' is not a git repository."
+  exit 1
+fi
+
+{
+  pushd "$BAKTOGIT_REPO" >/dev/null || exit 1
+
+  echo "==> $BAKTOGIT_REPO <=="
+  echo
+
+  for item in "$@"; do
+    if [ -d "$item" ]; then
+      [ -e ./"$item" ] && rm -r ./"$item"
+      mkdir -p ./"$item"
+    else
+      mkdir -p ./"$( dirname "$item" )"
+    fi
+
+    cp -vaT "$item" ./"$item"
+  done
+
+  echo
+  git add . ; git add -u ; git commit -m "baktogit @ $date"
+  echo
+  git status
+  echo
+
+  [[ "$BAKTOGIT_PUSH" == [yY]* ]] && git push
+
+  popd >/dev/null || exit 1
+}
+
+# vim: set tw=70 sw=2 sts=2 et fdm=marker :

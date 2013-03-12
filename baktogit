@@ -4,7 +4,7 @@
 #
 # File        : baktogit
 # Maintainer  : Felix C. Stegerman <flx@obfusk.net>
-# Date        : 2013-03-11
+# Date        : 2013-03-12
 #
 # Copyright   : Copyright (C) 2013  Felix C. Stegerman
 # Licence     : GPLv2
@@ -45,7 +45,6 @@ echo
 for item in "$@"; do
   echo "  ==> $item <=="
   if [ -d "$item" ]; then
-    [ -e ./"$item" ] && rm -r ./"$item"
     mkdir -p ./"$item"
     rsync -a --delete "$item"/ ./"$item"/
   else

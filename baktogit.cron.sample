@@ -1,18 +1,11 @@
 #!/bin/sh
 
-# === Installing ===
-#
-#   $ cp -i baktogit.cron.sample /etc/cron.daily/baktogit
-#   $ vim /etc/cron.daily/baktogit
-#   $ chmod +x /etc/cron.daily/baktogit
-#
-# --
-
 set -e
+export BAKTOGIT_REPO=/path/to/repo BAKTOGIT_PUSH=yes
+/opt/src/baktogit/baktogit.bash /paths/to /files/and/dirs
 
-export BAKTOGIT_REPO=/path/to/repo
-export BAKTOGIT_PUSH=yes
-
-/path/to/baktogit /paths /to /files /and /dirs
+# export MAILER_SUBJECT="baktogit of ` hostname ` @ ` date +'%F %T' `"
+# /opt/src/baktogit/baktogit.bash ... 2>&1 \
+#   | /opt/src/mailer/mailer.bash
 
 # --

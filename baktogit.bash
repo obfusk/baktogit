@@ -4,12 +4,14 @@
 #
 # File        : baktogit.bash
 # Maintainer  : Felix C. Stegerman <flx@obfusk.net>
-# Date        : 2013-05-06
+# Date        : 2013-05-13
 #
 # Copyright   : Copyright (C) 2013  Felix C. Stegerman
 # Licence     : GPLv2
 #
 # --                                                            ; }}}1
+
+umask 0077
 
 date="$( date +'%F %T' )"
 function die () { echo "$@" >&2; exit 1; }
@@ -24,7 +26,8 @@ if [[ "$VERBOSE" == [Yy]* ]]; then verbose=-v; else verbose=; fi
 
 pushd "$BAKTOGIT_REPO" >/dev/null || die 'pushd failed'
 
-echo "baktogit --> $BAKTOGIT_REPO" ; echo
+echo "baktogit of $( hostname ) @ $( date +'%F %T' )"
+echo "  --> $BAKTOGIT_REPO" ; echo
 
 for item in "$@"; do
   echo "==> $item <=="

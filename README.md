@@ -2,10 +2,10 @@
 
     File        : README.md
     Maintainer  : Felix C. Stegerman <flx@obfusk.net>
-    Date        : 2013-05-06
+    Date        : 2013-05-13
 
     Copyright   : Copyright (C) 2013  Felix C. Stegerman
-    Version     : 0.2.0
+    Version     : 0.2.1
 
 []: }}}1
 
@@ -54,13 +54,13 @@
 
 ### Cron
 
-  You may want to combine baktogit with mailer [3], to send a report
-  per email.
-
     $ cp -i /opt/src/baktogit/baktogit.cron.sample \
       /etc/cron.daily/baktogit
     $ vim /etc/cron.daily/baktogit
     $ chmod +x /etc/cron.daily/baktogit
+
+  You may also want to combine baktogit with mailer [3], to send a
+  report per email.
 
 []: }}}1
 

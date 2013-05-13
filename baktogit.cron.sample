@@ -2,10 +2,12 @@
 
 set -e
 export BAKTOGIT_REPO=/path/to/repo BAKTOGIT_PUSH=yes
-/opt/src/baktogit/baktogit.bash /paths/to /files/and/dirs
+
+/opt/src/baktogit/baktogit.bash /paths/to /files/and/dirs \
+  >> /var/log/baktogit.log 2>&1
 
 # export MAILER_SUBJECT="baktogit of ` hostname ` @ ` date +'%F %T' `"
-# /opt/src/baktogit/baktogit.bash ... 2>&1 \
-#   | /opt/src/mailer/mailer.bash
+# /opt/src/baktogit/baktogit.bash ... \
+#   2>&1 | tee -a /var/log/baktogit.log | /opt/src/mailer/mailer.bash
 
 # --

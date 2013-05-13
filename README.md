@@ -5,19 +5,22 @@
     Date        : 2013-05-13
 
     Copyright   : Copyright (C) 2013  Felix C. Stegerman
-    Version     : 0.2.1
+    Version     : 0.3.0-dev
 
 []: }}}1
+
+## TODO
+
+  * test!
 
 ## Description
 []: {{{1
 
   baktogit - backup w/ git
 
-  baktogit incrementally backups files and directories to a git
-  repository -- mostly intended for configuration files.  A .gitignore
-  file can be used to exclude files from being committed (but not from
-  being copied).  If requested, baktogit will also push to a remote.
+  baktogit uses rsync to incrementally backup files and directories to
+  a git repository -- mostly intended for configuration files.  If
+  requested, baktogit will also push to a remote.
 
   You may also be interested in etckeeper [2]; in contrast to baktogit
   (which copies configuration files to a git repository), etckeeper
@@ -49,8 +52,8 @@
     $ export BAKTOGIT_PUSH=yes            # to push as well
     $ export VERBOSE=yes                  # to be verbose
 
-    $ /opt/src/baktogit/baktogit.bash <file-or-dir(s)> ...
-                                          # absolute paths!
+    $ /opt/src/baktogit/baktogit.bash /a/foo /b/bar /c/qux \
+      --exclude=/a/foo/some/file          # absolute paths!
 
 ### Cron
 

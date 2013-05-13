@@ -24,28 +24,16 @@ if [[ "$VERBOSE" == [Yy]* ]]; then verbose=-v; else verbose=; fi
 
 # --
 
-pushd "$BAKTOGIT_REPO" >/dev/null || die 'pushd failed'
-
-echo "baktogit of $( hostname ) @ $( date +'%F %T' )"
+echo "baktogit of $( hostname ) @ $date"
 echo "  --> $BAKTOGIT_REPO" ; echo
 
-for item in "$@"; do
-  echo "==> $item <=="
-  if [ -d "$item" ]; then
-    mkdir -p ./"$item"
-    rsync -a $verbose --delete "$item"/ ./"$item"/
-  else
-    mkdir -p ./"$( dirname "$item" )"
-    cp -aT $verbose "$item" ./"$item"
-  fi
-  echo
-done
+rsync -aR $verbose --delete "$@" "$BAKTOGIT_REPO"/
+echo
 
+pushd "$BAKTOGIT_REPO" >/dev/null || die 'pushd failed'
 echo ; git add . ; git add -u ; git commit -m "baktogit @ $date"
 echo ; git status ; echo
-
 [[ "$BAKTOGIT_PUSH" == [Yy]* ]] && git push
-
 popd >/dev/null || die 'popd failed'
 
 # vim: set tw=70 sw=2 sts=2 et fdm=marker :

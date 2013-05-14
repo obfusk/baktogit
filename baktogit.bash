@@ -4,13 +4,14 @@
 #
 # File        : baktogit.bash
 # Maintainer  : Felix C. Stegerman <flx@obfusk.net>
-# Date        : 2013-05-13
+# Date        : 2013-05-14
 #
 # Copyright   : Copyright (C) 2013  Felix C. Stegerman
 # Licence     : GPLv2
 #
 # --                                                            ; }}}1
 
+set -e
 umask 0077
 
 date="$( date +'%F %T' )"

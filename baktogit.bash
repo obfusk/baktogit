@@ -31,10 +31,10 @@ echo "  --> $BAKTOGIT_REPO" ; echo
 rsync -aR $verbose --delete "$@" "$BAKTOGIT_REPO"/
 echo
 
-pushd "$BAKTOGIT_REPO" >/dev/null || die 'pushd failed'
+pushd "$BAKTOGIT_REPO" >/dev/null
 echo ; git add . ; git add -u ; git commit -m "baktogit @ $date"
 echo ; git status ; echo
 [[ "$BAKTOGIT_PUSH" == [Yy]* ]] && git push
-popd >/dev/null || die 'popd failed'
+popd >/dev/null
 
 # vim: set tw=70 sw=2 sts=2 et fdm=marker :

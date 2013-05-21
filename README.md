@@ -62,6 +62,8 @@
     $ /opt/src/baktogit/baktogit.bash /a/foo /b/bar /c/qux \
       --exclude=/a/foo/some/file          # absolute paths!
 
+  You'll need to `--exclude=.git` any `.git/` directories.
+
   Arguments will be passed on to rsync; as long as you only use paths,
   `--exclude`, and `--exclude-from` (or know what you are doing), all
   should be well.

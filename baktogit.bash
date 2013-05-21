@@ -4,7 +4,7 @@
 #
 # File        : baktogit.bash
 # Maintainer  : Felix C. Stegerman <flx@obfusk.net>
-# Date        : 2013-05-14
+# Date        : 2013-05-21
 #
 # Copyright   : Copyright (C) 2013  Felix C. Stegerman
 # Licence     : GPLv2
@@ -32,7 +32,12 @@ rsync -aR $verbose --delete "$@" "$BAKTOGIT_REPO"/
 echo
 
 pushd "$BAKTOGIT_REPO" >/dev/null
-echo ; git add . ; git add -u ; git commit -m "baktogit @ $date"
+git add . ; git add -u
+if [ -n "$( git status --porcelain )" ]; then
+  git commit -m "baktogit @ $date"
+else
+  echo '(no changes)'
+fi
 echo ; git status ; echo
 [[ "$BAKTOGIT_PUSH" == [Yy]* ]] && git push
 popd >/dev/null

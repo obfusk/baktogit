@@ -2,7 +2,7 @@
 
     File        : README.md
     Maintainer  : Felix C. Stegerman <flx@obfusk.net>
-    Date        : 2013-05-13
+    Date        : 2013-05-21
 
     Copyright   : Copyright (C) 2013  Felix C. Stegerman
     Version     : 0.3.0-dev
@@ -26,14 +26,21 @@
   (which copies configuration files to a git repository), etckeeper
   keeps /etc itself in version control.
 
-### Security Warning
+[]: }}}1
 
-  You should be careful about including files like /etc/shadow that
+## Security Warning
+[]: {{{1
+
+  You should be careful about including files like `/etc/shadow` that
   must remain secret; you should probably `chmod 700` the directory
-  containing your repository, and be very careful with .git/, clones,
-  and remotes; the etckeeper [2] README has more information on the
-  security implications of keeping these kinds of files in version
-  control.
+  containing your repository, and be very careful with `.git/`,
+  clones, and remotes; the etckeeper [2] README has more information
+  on the security implications of keeping these kinds of files in
+  version control.
+
+  Files you may want to exclude are: `/etc/shadow*`,
+  `/etc/ssh/ssh_host_*_key` and any other private keys and
+  configuration files with passwords.
 
 []: }}}1
 
@@ -54,6 +61,10 @@
 
     $ /opt/src/baktogit/baktogit.bash /a/foo /b/bar /c/qux \
       --exclude=/a/foo/some/file          # absolute paths!
+
+  Arguments will be passed on to rsync; as long as you only use paths,
+  `--exclude`, and `--exclude-from` (or know what you are doing), all
+  should be well.
 
 ### Cron
 

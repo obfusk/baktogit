@@ -5,13 +5,9 @@
     Date        : 2013-05-21
 
     Copyright   : Copyright (C) 2013  Felix C. Stegerman
-    Version     : 0.3.0-dev
+    Version     : 0.4.0
 
 []: }}}1
-
-## TODO
-
-  * test!
 
 ## Description
 []: {{{1

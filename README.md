@@ -46,7 +46,7 @@
 ### Install
 
     $ mkdir -p /opt/src
-    $ git clone https://github.com/noxqsgit/baktogit.git \
+    $ git clone https://github.com/obfusk/baktogit.git \
       /opt/src/baktogit
 
 ### Run

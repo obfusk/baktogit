@@ -93,7 +93,7 @@
   --- https://github.com/joeyh/etckeeper
 
   [3] mailer
-  --- https://github.com/noxqsgit/mailer
+  --- https://github.com/obfusk/mailer
 
 []: }}}1
 
